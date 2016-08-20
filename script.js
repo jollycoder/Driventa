@@ -1,5 +1,5 @@
 window.addEventListener('load', function () {
-    var animate = new ButtonAnimate({
+    buttonAnimate({
         elem: document.getElementsByClassName('button_inversion')[0],
         fillToCursor: true,         // если true, заливка при наведении будет идти к курсору, если false — к центру
         clickFillColor: '#164d8b',  // цвет заливки при клике
@@ -9,7 +9,7 @@ window.addEventListener('load', function () {
     })
 });
 
-function ButtonAnimate(options) {
+function buttonAnimate(options) {
     var button = options.elem;
     var parts = options.parts;
     var delay = options.delay;
