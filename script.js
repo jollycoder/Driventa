@@ -34,8 +34,8 @@ function ButtonAnimate(options) {
 
     function getCoord(event, elem) {
         return  {
-            x: event.pageX - getOffsetRect(button).left,
-            y: event.pageY - getOffsetRect(button).top
+            x: event.pageX - getOffsetRect(elem).left,
+            y: event.pageY - getOffsetRect(elem).top
         }
     }
     
