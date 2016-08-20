@@ -1,3 +1,5 @@
+"use strict";
+
 window.addEventListener('load', function () {
     buttonAnimate({
         elem: document.getElementsByClassName('button_inversion')[0],
