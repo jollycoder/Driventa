@@ -32,6 +32,14 @@ function GetCoords() {
             x: event.pageX - this.getOffsetRect(elem).left,
             y: event.pageY - this.getOffsetRect(elem).top
         }
+    };
+
+    this.getScrollHeight = function () {
+        return Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        )
     }
 }
 
@@ -74,15 +82,11 @@ function AnimateButton(options) {
         if (options.fillScreenOnClick && e == 'click')  {
             var cover = document.createElement("DIV");
             style = cover.style;
-            // style.pointerEvents = 'none';  // прозрачность для событий мыши
+            style.pointerEvents = 'none';  // прозрачность для событий мыши
             style.position = 'absolute';
             style.left = style.top = 0;
             style.width = '100vw';
-            style.height = Math.max(
-                    document.body.scrollHeight, document.documentElement.scrollHeight,
-                    document.body.offsetHeight, document.documentElement.offsetHeight,
-                    document.body.clientHeight, document.documentElement.clientHeight
-                ) + 'px';
+            style.height = this.getScrollHeight() + 'px';
             document.body.appendChild(cover);
             prefix = 'circle ';
             initGradientColor = 'rgba(255, 255, 255, 0)';
