@@ -81,6 +81,7 @@ function animateButton(options) {
             if (e == 'click')  {
                 left = getEventCoordOnElem(event, button).x + 'px';
                 top = getEventCoordOnElem(event, button).y + 'px';
+                style.cursor = 'default';
 
                 eventsData.forEach(function (item) {
                     button.removeEventListener(item.event, item.listener)
