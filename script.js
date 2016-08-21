@@ -6,15 +6,14 @@ window.addEventListener('load', function () {
         fillToCursor: true,         // если true, заливка при наведении будет идти к курсору, если false — к центру
         clickFillColor: '#164d8b',  // цвет заливки при клике
         clickTextColor: 'white',    // цвет текста при клике
-        parts: 12,                  // из скольки частей будет состоять анимация, чем больше — тем плавнее, но медленнее
-        delay: 10                   // задержка между частями анимации
+        parts: 12                   // из скольки частей будет состоять анимация, чем больше — тем плавнее, но медленнее
     })
 });
 
 function buttonAnimate(options) {
     var button = options.elem;
     var parts = options.parts;
-    var delay = options.delay;
+    var interval = 10;
 
     var firstColor = '#eb4634';
     var secondColor = 'white';
@@ -43,7 +42,7 @@ function buttonAnimate(options) {
 
     function setOnEvents() {
         style.transitionProperty = 'color';
-        style.transitionDuration = delay * parts + 'ms';
+        style.transitionDuration = interval * parts + 'ms';
 
         var eventsData = [{
             event: 'mouseover',
@@ -82,7 +81,7 @@ function buttonAnimate(options) {
             if (e == 'click')  {
                 left = getEventCoordOnElem(event, button).x + 'px';
                 top = getEventCoordOnElem(event, button).y + 'px';
-                
+
                 eventsData.forEach(function (item) {
                     button.removeEventListener(item.event, item.listener)
                 })
@@ -97,7 +96,7 @@ function buttonAnimate(options) {
                     style.background = fillColor;
                     clearInterval(timer);
                 }
-            }, delay);
+            }, interval);
         }
 
         eventsData.forEach(function (item) {
