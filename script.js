@@ -40,7 +40,7 @@ function buttonAnimate(options) {
             y: event.pageY - getOffsetRect(elem).top
         }
     }
-    
+
     function setOnEvents() {
         style.transitionProperty = 'color';
         style.transitionDuration = delay * parts + 'ms';
@@ -82,6 +82,10 @@ function buttonAnimate(options) {
             if (e == 'click')  {
                 left = getEventCoordOnElem(event, button).x + 'px';
                 top = getEventCoordOnElem(event, button).y + 'px';
+                
+                eventsData.forEach(function (item) {
+                    button.removeEventListener(item.event, item.listener)
+                })
             }
 
             var counter = 0;
@@ -94,12 +98,6 @@ function buttonAnimate(options) {
                     clearInterval(timer);
                 }
             }, delay);
-
-            if (e == 'click')  {
-                eventsData.forEach(function (item) {
-                    button.removeEventListener(item.event, item.listener)
-                })
-            }
         }
 
         eventsData.forEach(function (item) {
