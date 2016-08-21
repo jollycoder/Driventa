@@ -35,7 +35,6 @@ function GetCoords() {
 
 function AnimateButton(options) {
     GetCoords.call(this);
-    var self = this;
 
     var button = options.elem;
     var parts = options.parts;
@@ -102,10 +101,10 @@ function AnimateButton(options) {
         style.transitionProperty = 'color';
         style.transitionDuration = interval * parts + 'ms';
 
-        eventsData.forEach(function (item) {
-            button.addEventListener(item.event, item.listener = onEvent.bind(self, item))
-        });
+        eventsData.forEach((function (item) {
+            button.addEventListener(item.event, item.listener = onEvent.bind(this, item))
+        }).bind(this));
     }
 
-    setOnEvents();
+    setOnEvents.call(this);
 }
