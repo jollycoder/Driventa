@@ -97,14 +97,12 @@ function AnimateButton(options) {
         }, interval);
     }
 
-    function setOnEvents()  {
+    (function setOnEvents()  {
         style.transitionProperty = 'color';
         style.transitionDuration = interval * parts + 'ms';
 
         eventsData.forEach((function (item) {
             button.addEventListener(item.event, item.listener = onEvent.bind(this, item))
         }).bind(this));
-    }
-
-    setOnEvents.call(this);
+    }).call(this);
 }
