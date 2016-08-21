@@ -4,7 +4,7 @@ window.addEventListener('load', function () {
     buttonAnimate({
         elem: document.getElementsByClassName('button_inversion')[0],
         fillToCursor: true,                             // если true, заливка при наведении будет идти к курсору, если false — к центру
-        fillAllScreenOnClick: true,                     // если true, при клике по кнопке заливаем весь экран
+        fillScreenOnClick: true,                        // если true, при клике по кнопке заливаем весь экран
         clickScreenFillColor: 'rgba(22, 77, 139, .5)',  // цвет заливки экрана при клике
         clickButtonFillColor: '#164d8b',                // цвет заливки кнопки при клике
         clickTextColor: 'white',                        // цвет текста кнопки при клике
@@ -72,7 +72,7 @@ function buttonAnimate(options) {
             var elem = button;
             var initGradientColor = eventData.buttonTextColor;
 
-            if (options.fillAllScreenOnClick && e == 'click')  {
+            if (options.fillScreenOnClick && e == 'click')  {
                 var hover = document.createElement("DIV");
                 style = hover.style;
                 style.position = 'absolute';
