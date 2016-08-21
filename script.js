@@ -100,9 +100,9 @@ function AnimateButton(options) {
         }
         else style.color = eventData.buttonTextColor;
 
-        var gradientArray = [];
+        var gradientColors = [];
         for (var i = 0; i < parts; i++)  {
-            gradientArray[i] = initGradientColor
+            gradientColors[i] = initGradientColor
         }
 
         var left = '50%', top = '50%';
@@ -122,8 +122,8 @@ function AnimateButton(options) {
         var counter = 0;
         var timer = setInterval(function () {
             var index = (e != 'mouseover' ? counter : parts - 1 - counter);
-            gradientArray[index] = fillColor;
-            style.background = 'radial-gradient(' + prefix + 'at ' + left + ' ' + top + ',' + gradientArray.join(',') + ')';
+            gradientColors[index] = fillColor;
+            style.background = 'radial-gradient(' + prefix + 'at ' + left + ' ' + top + ',' + gradientColors.join(',') + ')';
             if (++counter == parts)  {
                 style.background = fillColor;
                 clearInterval(timer);
