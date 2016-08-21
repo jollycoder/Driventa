@@ -136,10 +136,9 @@ function AnimateButton(options) {
         style.transitionProperty = 'color';
         style.transitionDuration = interval * parts + 'ms';
 
-        eventsData.forEach(addListener.bind(this));
-        function addListener(item) {
+        eventsData.forEach((function (item) {
             button.addEventListener(item.event, item.listener = onEvent.bind(this, item))
-        }
+        }).bind(this));
     }
 
     setOnEvents.call(this);
