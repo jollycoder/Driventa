@@ -73,8 +73,9 @@ function buttonAnimate(options) {
             var initGradientColor = eventData.buttonTextColor;
 
             if (options.fillScreenOnClick && e == 'click')  {
-                var hover = document.createElement("DIV");
-                style = hover.style;
+                var cover = document.createElement("DIV");
+                style = cover.style;
+             // style.pointerEvents = 'none';  // прозрачность для событий мыши
                 style.position = 'absolute';
                 style.left = style.top = 0;
                 style.width = '100vw';
@@ -83,12 +84,12 @@ function buttonAnimate(options) {
                     document.body.offsetHeight, document.documentElement.offsetHeight,
                     document.body.clientHeight, document.documentElement.clientHeight
                 ) + 'px';
-                document.body.appendChild(hover);
+                document.body.appendChild(cover);
                 prefix = 'circle ';
                 initGradientColor = 'rgba(255, 255, 255, 0)';
                 fillColor = options.clickScreenFillColor;
                 parts = 50;
-                elem = hover;
+                elem = cover;
             }
 
             style.color = eventData.buttonTextColor;
