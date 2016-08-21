@@ -98,8 +98,7 @@ function AnimateButton(options) {
             elem = createDivOverAll.call(this);
             style = elem.style
         }
-
-        style.color = eventData.buttonTextColor;
+        else style.color = eventData.buttonTextColor;
 
         var gradientArray = [];
         for (var i = 0; i < parts; i++)  {
@@ -113,7 +112,7 @@ function AnimateButton(options) {
         if (e == 'click')  {
             left = this.getEventCoordOnElem(event, elem).x + 'px';
             top = this.getEventCoordOnElem(event, elem).y + 'px';
-            style.cursor = 'default';
+            button.style.cursor = 'default';
 
             eventsData.forEach(function (item) {
                 button.removeEventListener(item.event, item.listener)
