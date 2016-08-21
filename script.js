@@ -3,17 +3,19 @@
 window.addEventListener('load', function () {
     buttonAnimate({
         elem: document.getElementsByClassName('button_inversion')[0],
-        fillToCursor: true,         // если true, заливка при наведении будет идти к курсору, если false — к центру
-        clickFillColor: '#164d8b',  // цвет заливки при клике
-        clickTextColor: 'white',    // цвет текста при клике
-        parts: 12                   // количество частей в анимации кнопки, чем больше — тем плавнее, но медленнее
+        fillToCursor: true,                             // если true, заливка при наведении будет идти к курсору, если false — к центру
+        fillScreenOnClick: true,                        // если true, при клике по кнопке заливаем весь экран
+        clickScreenFillColor: 'rgba(22, 77, 139, .5)',  // цвет заливки экрана при клике
+        clickButtonFillColor: '#164d8b',                // цвет заливки кнопки при клике
+        clickTextColor: 'white',                        // цвет текста кнопки при клике
+        parts: 12                                       // количество частей в анимации кнопки, чем больше — тем плавнее, но медленнее
     })
 });
 
 function buttonAnimate(options) {
     var button = options.elem;
     var parts = options.parts;
-    
+
     var interval = 10;
     var firstColor = '#eb4634';
     var secondColor = 'white';
@@ -60,38 +62,60 @@ function buttonAnimate(options) {
             event: 'click',
             buttonTextColor: options.clickTextColor,
             initGradientColor: secondColor,
-            fillColor: options.clickFillColor
+            fillColor: options.clickButtonFillColor
         }];
 
         function onEvent(eventData, event) {
             var e = eventData.event;
             var fillColor = eventData.fillColor;
+            var prefix = '';
+            var elem = button;
+            var initGradientColor = eventData.buttonTextColor;
+
+            if (options.fillScreenOnClick && e == 'click')  {
+                var hover = document.createElement("DIV");
+                style = hover.style;
+                style.position = 'absolute';
+                style.left = style.top = 0;
+                style.width = '100vw';
+                style.height = Math.max(
+                    document.body.scrollHeight, document.documentElement.scrollHeight,
+                    document.body.offsetHeight, document.documentElement.offsetHeight,
+                    document.body.clientHeight, document.documentElement.clientHeight
+                ) + 'px';
+                document.body.appendChild(hover);
+                prefix = 'circle ';
+                initGradientColor = 'rgba(255, 255, 255, 0)';
+                fillColor = options.clickScreenFillColor;
+                parts = 50;
+                elem = hover;
+            }
 
             style.color = eventData.buttonTextColor;
 
             var gradientArray = [];
             for (var i = 0; i < parts; i++)  {
-                gradientArray[i] = eventData.initGradientColor
+                gradientArray[i] = initGradientColor
             }
 
             var left = '50%', top = '50%';
             if ((e == 'mouseover' || e == 'mouseout') && options.fillToCursor)
-                left = getEventCoordOnElem(event, button).x + 'px';
+                left = getEventCoordOnElem(event, elem).x + 'px';
 
             if (e == 'click')  {
-                left = getEventCoordOnElem(event, button).x + 'px';
-                top = getEventCoordOnElem(event, button).y + 'px';
+                left = getEventCoordOnElem(event, elem).x + 'px';
+                top = getEventCoordOnElem(event, elem).y + 'px';
 
                 eventsData.forEach(function (item) {
                     button.removeEventListener(item.event, item.listener)
-                })
+                });
             }
 
             var counter = 0;
             var timer = setInterval(function () {
                 var index = (e != 'mouseover' ? counter : parts - 1 - counter);
                 gradientArray[index] = fillColor;
-                style.background = 'radial-gradient(at ' + left + ' ' + top + ',' + gradientArray.join(',') + ')';
+                style.background = 'radial-gradient(' + prefix + 'at ' + left + ' ' + top + ',' + gradientArray.join(',') + ')';
                 if (++counter == parts)  {
                     style.background = fillColor;
                     clearInterval(timer);
