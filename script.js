@@ -34,7 +34,7 @@ function buttonAnimate(options) {
         return { top: Math.round(top), left: Math.round(left) }
     }
 
-    function getCoord(event, elem) {
+    function getEventCoordOnElem(event, elem) {
         return  {
             x: event.pageX - getOffsetRect(elem).left,
             y: event.pageY - getOffsetRect(elem).top
@@ -66,6 +66,7 @@ function buttonAnimate(options) {
 
         function onEvent(eventData, event) {
             var e = eventData.event;
+            var fillColor = eventData.fillColor;
 
             style.color = eventData.buttonTextColor;
 
@@ -76,19 +77,22 @@ function buttonAnimate(options) {
 
             var x = '50%', y = '50%';
             if ((e == 'mouseover' || e == 'mouseout') && options.fillToCursor)
-                x = getCoord(event, button).x + 'px';
+                x = getEventCoordOnElem(event, button).x + 'px';
 
             if (e == 'click')  {
-                x = getCoord(event, button).x + 'px';
-                y = getCoord(event, button).y + 'px';
+                x = getEventCoordOnElem(event, button).x + 'px';
+                y = getEventCoordOnElem(event, button).y + 'px';
             }
 
             var counter = 0;
             var timer = setInterval(function () {
-                var index = e != 'mouseover' ? counter : parts - 1 - counter;
-                gradientArray[index] = eventData.fillColor;
+                var index = (e != 'mouseover' ? counter : parts - 1 - counter);
+                gradientArray[index] = fillColor;
                 style.background = 'radial-gradient(at ' + x + ' ' + y + ',' + gradientArray.join(',') + ')';
-                if (++counter == parts) clearInterval(timer)
+                if (++counter == parts)  {
+                    style.background = fillColor;
+                    clearInterval(timer);
+                }
             }, delay);
 
             if (e == 'click')  {
