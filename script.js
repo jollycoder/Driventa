@@ -75,20 +75,20 @@ function buttonAnimate(options) {
                 gradientArray[i] = eventData.initGradientColor
             }
 
-            var x = '50%', y = '50%';
+            var left = '50%', top = '50%';
             if ((e == 'mouseover' || e == 'mouseout') && options.fillToCursor)
-                x = getEventCoordOnElem(event, button).x + 'px';
+                left = getEventCoordOnElem(event, button).x + 'px';
 
             if (e == 'click')  {
-                x = getEventCoordOnElem(event, button).x + 'px';
-                y = getEventCoordOnElem(event, button).y + 'px';
+                left = getEventCoordOnElem(event, button).x + 'px';
+                top = getEventCoordOnElem(event, button).y + 'px';
             }
 
             var counter = 0;
             var timer = setInterval(function () {
                 var index = (e != 'mouseover' ? counter : parts - 1 - counter);
                 gradientArray[index] = fillColor;
-                style.background = 'radial-gradient(at ' + x + ' ' + y + ',' + gradientArray.join(',') + ')';
+                style.background = 'radial-gradient(at ' + left + ' ' + top + ',' + gradientArray.join(',') + ')';
                 if (++counter == parts)  {
                     style.background = fillColor;
                     clearInterval(timer);
