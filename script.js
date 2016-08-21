@@ -45,7 +45,6 @@ function GetCoords() {
 
 function AnimateButton(options) {
     GetCoords.call(this);
-    var self = this;
 
     var button = options.elem;
     var parts = options.parts;
@@ -72,6 +71,18 @@ function AnimateButton(options) {
         fillColor: options.clickButtonFillColor
     }];
 
+    function createDivOverAll()  {
+        var cover = document.createElement("DIV");
+        var s = cover.style;
+        s.pointerEvents = 'none';  // прозрачность для событий мыши
+        s.position = 'absolute';
+        s.left = s.top = 0;
+        s.width = '100vw';
+        s.height = this.getScrollHeight() + 'px';
+        document.body.appendChild(cover);
+        return cover
+    }
+
     function onEvent(eventData, event) {
         var e = eventData.event;
         var fillColor = eventData.fillColor;
@@ -80,19 +91,12 @@ function AnimateButton(options) {
         var initGradientColor = eventData.initGradientColor;
 
         if (options.fillScreenOnClick && e == 'click')  {
-            var cover = document.createElement("DIV");
-            style = cover.style;
-            style.pointerEvents = 'none';  // прозрачность для событий мыши
-            style.position = 'absolute';
-            style.left = style.top = 0;
-            style.width = '100vw';
-            style.height = this.getScrollHeight() + 'px';
-            document.body.appendChild(cover);
             prefix = 'circle ';
             initGradientColor = 'rgba(255, 255, 255, 0)';
             fillColor = options.clickScreenFillColor;
             parts = 60;
-            elem = cover;
+            elem = createDivOverAll.call(this);
+            style = elem.style
         }
 
         style.color = eventData.buttonTextColor;
@@ -132,10 +136,11 @@ function AnimateButton(options) {
         style.transitionProperty = 'color';
         style.transitionDuration = interval * parts + 'ms';
 
-        eventsData.forEach(function (item) {
-            button.addEventListener(item.event, item.listener = onEvent.bind(self, item))
-        });
+        eventsData.forEach(addListener.bind(this));
+        function addListener(item) {
+            button.addEventListener(item.event, item.listener = onEvent.bind(this, item))
+        }
     }
 
-    setOnEvents();
+    setOnEvents.call(this);
 }
