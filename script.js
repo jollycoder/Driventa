@@ -1,7 +1,7 @@
 "use strict";
 
 window.addEventListener('load', function () {
-    buttonAnimate({
+    animateButton({
         elem: document.getElementsByClassName('button_inversion')[0],
         fillToCursor: true,                             // если true, заливка при наведении будет идти к курсору, если false — к центру
         fillScreenOnClick: true,                        // если true, при клике по кнопке заливаем весь экран
@@ -12,7 +12,7 @@ window.addEventListener('load', function () {
     })
 });
 
-function buttonAnimate(options) {
+function animateButton(options) {
     var button = options.elem;
     var parts = options.parts;
 
@@ -52,25 +52,25 @@ function buttonAnimate(options) {
             initGradientColor: 'rgba(255, 255, 255, 0)',
             fillColor: secondColor
         },
-        {
-            event: 'mouseout',
-            buttonTextColor: secondColor,
-            initGradientColor: secondColor,
-            fillColor: 'rgba(255, 255, 255, 0)'
-        },
-        {
-            event: 'click',
-            buttonTextColor: options.clickTextColor,
-            initGradientColor: secondColor,
-            fillColor: options.clickButtonFillColor
-        }];
+            {
+                event: 'mouseout',
+                buttonTextColor: secondColor,
+                initGradientColor: secondColor,
+                fillColor: 'rgba(255, 255, 255, 0)'
+            },
+            {
+                event: 'click',
+                buttonTextColor: options.clickTextColor,
+                initGradientColor: secondColor,
+                fillColor: options.clickButtonFillColor
+            }];
 
         function onEvent(eventData, event) {
             var e = eventData.event;
             var fillColor = eventData.fillColor;
             var prefix = '';
             var elem = button;
-            var initGradientColor = eventData.buttonTextColor;
+            var initGradientColor = eventData.initGradientColor;
 
             if (options.fillScreenOnClick && e == 'click')  {
                 var hover = document.createElement("DIV");
@@ -79,10 +79,10 @@ function buttonAnimate(options) {
                 style.left = style.top = 0;
                 style.width = '100vw';
                 style.height = Math.max(
-                    document.body.scrollHeight, document.documentElement.scrollHeight,
-                    document.body.offsetHeight, document.documentElement.offsetHeight,
-                    document.body.clientHeight, document.documentElement.clientHeight
-                ) + 'px';
+                        document.body.scrollHeight, document.documentElement.scrollHeight,
+                        document.body.offsetHeight, document.documentElement.offsetHeight,
+                        document.body.clientHeight, document.documentElement.clientHeight
+                    ) + 'px';
                 document.body.appendChild(hover);
                 prefix = 'circle ';
                 initGradientColor = 'rgba(255, 255, 255, 0)';
@@ -99,7 +99,7 @@ function buttonAnimate(options) {
             }
 
             var left = '50%', top = '50%';
-            if ((e == 'mouseover' || e == 'mouseout') && options.fillToCursor)
+            if (e != 'click' && options.fillToCursor)
                 left = getEventCoordOnElem(event, elem).x + 'px';
 
             if (e == 'click')  {
