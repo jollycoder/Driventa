@@ -3,7 +3,7 @@
 window.addEventListener('load', function () {
     animateButton({
         elem: document.getElementsByClassName('button_inversion')[0],
-        fillToCursor: true,         // если true, заливка при наведении будет идти к курсору, если false — к центру
+        fillToCursor: true,         // если true — заливка при наведении будет идти к курсору, если false — к центру
         clickFillColor: '#164d8b',  // цвет заливки при клике
         clickTextColor: 'white',    // цвет текста при клике
         parts: 12                   // из скольки частей будет состоять анимация, чем больше — тем плавнее, но медленнее
