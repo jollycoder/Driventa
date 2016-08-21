@@ -5,10 +5,10 @@ window.addEventListener('load', function () {
         elem: document.getElementsByClassName('button_inversion')[0],
         fillToCursor: true,                             // если true, заливка при наведении будет идти к курсору, если false — к центру
         fillAllScreenOnClick: true,                     // если true, при клике по кнопке заливаем весь экран
-        clickButtonFillColor: '#164d8b',                // цвет заливки кнопки при клике
         clickScreenFillColor: 'rgba(22, 77, 139, .5)',  // цвет заливки экрана при клике
-        clickTextColor: 'white',                        // цвет текста при клике
-        parts: 12                                       // из скольки частей будет состоять анимация, чем больше — тем плавнее, но медленнее
+        clickButtonFillColor: '#164d8b',                // цвет заливки кнопки при клике
+        clickTextColor: 'white',                        // цвет текста кнопки при клике
+        parts: 12                                       // из скольки частей будет состоять анимация кнопки, чем больше — тем плавнее, но медленнее
     })
 });
 
