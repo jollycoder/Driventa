@@ -13,8 +13,8 @@ window.addEventListener('load', function () {
 function buttonAnimate(options) {
     var button = options.elem;
     var parts = options.parts;
+    
     var interval = 10;
-
     var firstColor = '#eb4634';
     var secondColor = 'white';
     var style = button.style;
