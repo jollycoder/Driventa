@@ -1,7 +1,7 @@
 "use strict";
 
 window.addEventListener('load', function () {
-    buttonAnimate({
+    animateButton({
         elem: document.getElementsByClassName('button_inversion')[0],
         fillToCursor: true,                             // если true, заливка при наведении будет идти к курсору, если false — к центру
         fillScreenOnClick: true,                        // если true, при клике по кнопке заливаем весь экран
@@ -12,7 +12,7 @@ window.addEventListener('load', function () {
     })
 });
 
-function buttonAnimate(options) {
+function animateButton(options) {
     var button = options.elem;
     var parts = options.parts;
 
@@ -70,7 +70,7 @@ function buttonAnimate(options) {
             var fillColor = eventData.fillColor;
             var prefix = '';
             var elem = button;
-            var initGradientColor = eventData.buttonTextColor;
+            var initGradientColor = eventData.initGradientColor;
 
             if (options.fillScreenOnClick && e == 'click')  {
                 var cover = document.createElement("DIV");
@@ -100,7 +100,7 @@ function buttonAnimate(options) {
             }
 
             var left = '50%', top = '50%';
-            if ((e == 'mouseover' || e == 'mouseout') && options.fillToCursor)
+            if (e != 'click' && options.fillToCursor)
                 left = getEventCoordOnElem(event, elem).x + 'px';
 
             if (e == 'click')  {
