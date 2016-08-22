@@ -1,2 +1,0 @@
-# Driventa
-Стажировка на Driventa
