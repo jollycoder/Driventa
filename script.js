@@ -2,7 +2,7 @@
 
 window.addEventListener('load', function () {
     var animate = new AnimateButton({
-        elem: document.getElementsByClassName('button_inversion')[0],
+        elem: document.querySelector('.button_inversion'),
         fillToCursor: true,                             // если true — заливка при наведении будет идти к курсору, если false — к центру
         fillScreenOnClick: true,                        // если true — при клике по кнопке заливаем весь экран
         clickScreenFillColor: 'rgba(22, 77, 139, .5)',  // цвет заливки экрана при клике
