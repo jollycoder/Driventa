@@ -86,12 +86,12 @@ function AnimateButton(options) {
     function onEvent(eventData, event) {
         var e = eventData.event;
         var fillColor = eventData.fillColor;
-        var prefix = '';
+        var gradType = 'ellipse';
         var elem = button;
         var initGradientColor = eventData.initGradientColor;
 
         if (options.fillScreenOnClick && e == 'click')  {
-            prefix = 'circle ';
+            gradType = 'circle';
             initGradientColor = 'rgba(255, 255, 255, 0)';
             fillColor = options.clickScreenFillColor;
             parts = 60;
@@ -123,7 +123,7 @@ function AnimateButton(options) {
         var timer = setInterval(function () {
             var index = (e != 'mouseover' ? counter : parts - 1 - counter);
             gradientColors[index] = fillColor;
-            style.background = 'radial-gradient(' + prefix + 'at ' + left + ' ' + top + ',' + gradientColors.join(',') + ')';
+            style.background = 'radial-gradient(' + gradType + ' at ' + left + ' ' + top + ',' + gradientColors.join(',') + ')';
             if (++counter == parts)  {
                 style.background = fillColor;
                 clearInterval(timer);
