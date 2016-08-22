@@ -2,7 +2,7 @@
 
 window.addEventListener('load', function () {
     var animate = new AnimateButton({
-        elem: document.getElementsByClassName('button_inversion')[0],
+        elem: document.querySelector('.button_inversion'),
         fillToCursor: true,                             // если true, заливка при наведении будет идти к курсору, если false — к центру
         clickButtonFillColor: '#164d8b',                // цвет заливки кнопки при клике
         clickTextColor: 'white',                        // цвет текста кнопки при клике
